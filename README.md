@@ -28,9 +28,17 @@ brew install pyenv
 brew install gh
 ```
 
+# clone this repo
+```
+mkdir ~/open
+gh auth login
+gh repo clone tconbeer/linux_setup ~/open/linux_setup
+```
+
 # configure profiles
 
 ```
+cd ~/open/linux_setup
 cp ./.profile ~/.profile
 cp ./.bashrc ~/.bashrc
 ```

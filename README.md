@@ -26,6 +26,7 @@ brew update
 brew install gcc
 brew install pyenv
 brew install gh
+brew install pipenv
 ```
 
 # clone this repo

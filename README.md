@@ -55,4 +55,6 @@ pyenv global 3.8.10
 
 ```
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+source ~/.profile
+poetry completions bash > /etc/bash_completion.d/poetry.bash-completion
 ```

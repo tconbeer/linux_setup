@@ -43,3 +43,16 @@ cd ~/open/linux_setup
 cp ./.profile ~/.profile
 cp ./.bashrc ~/.bashrc
 ```
+
+# install python
+
+```
+pyenv install 3.8.10
+pyenv global 3.8.10
+```
+
+# install poetry
+
+```
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+```

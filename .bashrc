@@ -122,3 +122,24 @@ if shopt -q login_shell; then
   eval "$(pyenv init --path)"
 fi
 eval "$(pyenv init -)"
+
+# heroku autocomplete setup
+HEROKU_AC_BASH_SETUP_PATH=/home/tco/.cache/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH; eval
+
+# patch for issue with thefuck on WSL
+function fuck () {
+    TF_PYTHONIOENCODING=$PYTHONIOENCODING;
+    export TF_SHELL=bash;
+    export TF_ALIAS=fuck;
+    export TF_SHELL_ALIASES=$(alias);
+    export TF_HISTORY=$(fc -ln -10);
+    export PYTHONIOENCODING=utf-8;
+    TF_CMD=$(
+        thefuck THEFUCK_ARGUMENT_PLACEHOLDER "$@"
+    ) && eval "$TF_CMD";
+    unset TF_HISTORY;
+    export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
+    history -s $TF_CMD;
+}
+eval "$(thefuck --alias)"
+export THEFUCK_PRIORITY="git_hook_bypass=1100"

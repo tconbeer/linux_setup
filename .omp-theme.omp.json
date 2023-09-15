@@ -1,0 +1,64 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "blocks": [
+      {
+        "segments": [
+          {
+            "foreground": "#FEFFAC",
+            "properties": {
+              "time_format": "15:04:05"
+            },
+            "style": "plain",
+            "template": " {{ .CurrentDate | date .Format }} ",
+            "type": "time"
+          }
+        ],
+        "type": "rprompt"
+      },
+      {
+        "alignment": "left",
+        "segments": [
+          {
+            "foreground": "#FEFFAC",
+            "properties": {
+              "style": "full"
+            },
+            "style": "plain",
+            "template": "{{ .Path }} ",
+            "type": "path"
+          },
+          {
+            "foreground": "#FFB6D9",
+            "style": "plain",
+            "template": "{{ .HEAD }} {{if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }} ",
+            "properties": {
+              "fetch_status": true
+            },
+            "type": "git"
+          },
+          {
+            "type": "python",
+            "style": "plain",
+            "foreground": "#D67BFF",
+            "fetch_version": false,
+            "template": " {{ .Major }}.{{ .Minor }} "
+          },
+          {
+            "type": "node",
+            "style": "plain",
+            "foreground": "#D67BFF",
+            "template": " {{ .Major }}.{{ .Minor }} "
+          },
+          {
+            "foreground": "#45FFCA",
+            "style": "plain",
+            "template": "\u276f ",
+            "type": "text"
+          }
+        ],
+        "type": "prompt"
+      }
+    ],
+    "version": 2
+  }
+  

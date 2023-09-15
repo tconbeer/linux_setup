@@ -88,7 +88,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alF --block-size=k'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -123,23 +123,21 @@ if shopt -q login_shell; then
 fi
 eval "$(pyenv init -)"
 
-# heroku autocomplete setup
-HEROKU_AC_BASH_SETUP_PATH=/home/tco/.cache/heroku/autocomplete/bash_setup && test -f $HEROKU_AC_BASH_SETUP_PATH && source $HEROKU_AC_BASH_SETUP_PATH; eval
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# patch for issue with thefuck on WSL
-function fuck () {
-    TF_PYTHONIOENCODING=$PYTHONIOENCODING;
-    export TF_SHELL=bash;
-    export TF_ALIAS=fuck;
-    export TF_SHELL_ALIASES=$(alias);
-    export TF_HISTORY=$(fc -ln -10);
-    export PYTHONIOENCODING=utf-8;
-    TF_CMD=$(
-        thefuck THEFUCK_ARGUMENT_PLACEHOLDER "$@"
-    ) && eval "$TF_CMD";
-    unset TF_HISTORY;
-    export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
-    history -s $TF_CMD;
-}
-eval "$(thefuck --alias)"
-export THEFUCK_PRIORITY="git_hook_bypass=1100"
+source /home/tco/.bash_completions/openapi-python-client.sh
+
+# pnpm
+export PNPM_HOME="/home/tco/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# for oh-my-posh themes and config
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+export COLORTERM=truecolor
+eval "$(oh-my-posh init bash --config ~/.omp-theme.omp.json)"

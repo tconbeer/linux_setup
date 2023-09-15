@@ -36,3 +36,4 @@ if [ -z "$BASH_VERSION" ]; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
+

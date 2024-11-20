@@ -116,16 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if shopt -q login_shell; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi
-eval "$(pyenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source "$HOME/.bash_completions/openapi-python-client.sh"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
@@ -139,3 +135,11 @@ esac
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export COLORTERM=truecolor
 eval "$(oh-my-posh init bash --config ~/.omp-theme.omp.json)"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then . "$HOME/google-cloud-sdk/path.bash.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then . "$HOME/google-cloud-sdk/completion.bash.inc"; fi
+
+# this is for uv
+. "$HOME/.cargo/env"
